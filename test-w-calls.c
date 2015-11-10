@@ -57,55 +57,7 @@ static GCC_INLINE void fc_solve_output_result_to_file(
 
             int move_num = 0;
 
-            FILE * o = fopen("calls.c", "w");
-            while (
-                    freecell_solver_user_get_next_move(
-                        instance,
-                        &move
-                        ) == 0
-                  )
-            {
-                as_string =
-                    freecell_solver_user_current_state_as_string(
-                        instance,
-                        1,
-                        0,
-                        1
-                    );
-
-                fprintf(o,
-                    "as_string = strdup(\""
-                );
-
-                {
-                    char * s = as_string;
-                    while (*s)
-                    {
-                        if (*s == '\n')
-                        {
-                            fprintf(o, "\\n");
-                        }
-                        else
-                        {
-                            fprintf(o, "%c", *s);
-                        }
-                        s++;
-                    }
-                }
-
-                fprintf(o, "\");\n\n");
-
-                fprintf(output_fh, "%s\n", as_string);
-                fprintf(o, "%s\n\n", "fprintf(output_fh, \"%s\\n\", as_string);");
-                free(as_string);
-                fprintf (o, "%s\n\n", "free(as_string);");
-
-                fprintf(output_fh, "%s", "\n====================\n\n");
-                fprintf (o, "%s\n\n", "fprintf(output_fh, \"%s\", \"\\n====================\\n\\n\");");
-
-            }
-
-            fclose(o);
+#include "calls.c"
         }
 
     return;
