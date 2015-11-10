@@ -85,7 +85,6 @@ static GCC_INLINE void fc_solve_output_result_to_file(
     const fc_solve_display_information_context_t * const dc_ptr
 )
 {
-    const typeof(*dc_ptr) debug_context = (*dc_ptr);
         {
             fcs_move_t move;
 
@@ -99,25 +98,18 @@ static GCC_INLINE void fc_solve_output_result_to_file(
                         ) == 0
                   )
             {
+                as_string =
+                    freecell_solver_user_current_state_as_string(
+                        instance,
+                        1,
+                        0,
+                        1
+                    );
 
-                if (debug_context.display_states)
-                {
-                    as_string =
-                        freecell_solver_user_current_state_as_string(
-                                instance,
-                                debug_context.parseable_output,
-                                debug_context.canonized_order_output,
-                                debug_context.display_10_as_t
-                                );
+                fprintf(output_fh, "%s\n", as_string);
 
-                    fprintf(output_fh, "%s\n", as_string);
-
-                    free(as_string);
-                }
-
-                {
-                    fprintf(output_fh, "%s", "\n====================\n\n");
-                }
+                free(as_string);
+                fprintf(output_fh, "%s", "\n====================\n\n");
             }
 
         }
