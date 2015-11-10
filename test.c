@@ -44,45 +44,10 @@ extern "C" {
 
 #include "fcs_enums.h"
 
-struct fc_solve_display_information_context_struct
-{
-    fcs_bool_t debug_iter_state_output;
-    int freecells_num;
-    int stacks_num;
-    int decks_num;
-    fcs_bool_t parseable_output;
-    fcs_bool_t canonized_order_output;
-    fcs_bool_t display_10_as_t;
-    fcs_bool_t display_parent_iter_num;
-    fcs_bool_t debug_iter_output_on;
-    fcs_bool_t display_moves;
-    fcs_bool_t display_states;
-    fcs_bool_t show_exceeded_limits;
-    int standard_notation;
-    const char * output_filename;
-};
-
-typedef struct fc_solve_display_information_context_struct fc_solve_display_information_context_t;
-
-static const fc_solve_display_information_context_t INITIAL_DISPLAY_CONTEXT =
-(fc_solve_display_information_context_t) {
-    .debug_iter_state_output = FALSE,
-    .parseable_output = FALSE,
-    .canonized_order_output = FALSE,
-    .display_10_as_t = FALSE,
-    .display_parent_iter_num = FALSE,
-    .display_moves = FALSE,
-    .display_states = TRUE,
-    .standard_notation = FC_SOLVE__STANDARD_NOTATION_NO,
-    .output_filename = NULL,
-    .show_exceeded_limits = FALSE
-};
-
 static GCC_INLINE void fc_solve_output_result_to_file(
     FILE * const output_fh,
     void * const instance,
-    const int ret,
-    const fc_solve_display_information_context_t * const dc_ptr
+    const int ret
 )
 {
         {
@@ -120,16 +85,10 @@ static GCC_INLINE void fc_solve_output_result_to_file(
 char shlomif_buffer[2000000];
 char shlomif_board_buf[500];
 
-static fc_solve_display_information_context_t my_context;
-
 static void * fcs;
 
 int main(int argc, char * argv[])
 {
-    my_context = INITIAL_DISPLAY_CONTEXT;
-
-    my_context.parseable_output = my_context.display_10_as_t = my_context.show_exceeded_limits = TRUE;
-
     fcs = freecell_solver_user_alloc();
     const char * const board_str =
 "JD KD 2S 4C 3S 6D 6S\n"
@@ -148,11 +107,11 @@ int main(int argc, char * argv[])
     FILE * output_fh = fopen("foo.txt", "w");
 #endif
 
-    #if 1
-    fc_solve_output_result_to_file(output_fh, fcs, ret, &my_context);
-    #else
-    fc_solve_output_result_to_file(stdout, fcs, ret, &my_context);
-    #endif
+#if 1
+    fc_solve_output_result_to_file(output_fh, fcs, ret);
+#else
+    fc_solve_output_result_to_file(stdout, fcs, ret);
+#endif
 
     fclose(output_fh);
 
