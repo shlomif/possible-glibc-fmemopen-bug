@@ -1,0 +1,14 @@
+=encoding utf8
+
+=head1 Reproduce a bug with glibc's fmemopen on Mageia Linux x86-64 Cauldron
+
+To reproduce type:
+
+   make test
+
+You'll need gcc and perl 5.
+
+Tested with glibc-2.22-9.mga6, gcc-5.2.1-0.20151103.1.mga6 on Mageia Linux
+x86-64 v6 (Cauldron).
+
+=cut
