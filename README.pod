@@ -16,4 +16,10 @@ Tested with glibc-2.22-9.mga6, gcc-5.2.1-0.20151103.1.mga6 on Mageia Linux
 x86-64 v6 (Cauldron). Also tested with the vanilla glibc. This seems to
 work fine on Debian x86-64 Testing and on Fedora x86-64 22.
 
+=head2 About the code.
+
+There are some C<#if> statements in the code that can toggle a different
+behaviour. As can be seen when printing to C<stdout> or to a file, everything
+is working fine.
+
 =cut
