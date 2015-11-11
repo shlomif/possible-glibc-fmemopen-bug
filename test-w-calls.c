@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
 
     fclose(output_fh);
 
-    printf("Buffer=\"%s\"\n", shlomif_buffer);
+    printf("Buffer=<<<\n%s\n>>>\n", shlomif_buffer);
 
     return 0;
 }
