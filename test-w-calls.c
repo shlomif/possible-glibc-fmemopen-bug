@@ -16,8 +16,6 @@ static inline void fc_solve_output_result_to_file(
 char shlomif_buffer[2000000];
 char shlomif_board_buf[500];
 
-static void * fcs;
-
 int main(int argc, char * argv[])
 {
 #if 1
