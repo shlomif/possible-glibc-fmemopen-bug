@@ -13,13 +13,14 @@ static inline void fc_solve_output_result_to_file(
     return;
 }
 
-char shlomif_buffer[2000000];
+char * shlomif_buffer;
+size_t shlomif_buffer_size;
 char shlomif_board_buf[500];
 
 int main(int argc, char * argv[])
 {
 #if 1
-    FILE * output_fh = fmemopen(shlomif_buffer, sizeof(shlomif_buffer), "w");
+    FILE * output_fh = open_memstream(&shlomif_buffer, &shlomif_buffer_size);
 #else
     FILE * output_fh = fopen("foo.txt", "w");
 #endif
@@ -33,6 +34,8 @@ int main(int argc, char * argv[])
     fclose(output_fh);
 
     printf("Buffer=<<<\n%s\n>>>\n", shlomif_buffer);
+
+    free (shlomif_buffer);
 
     return 0;
 }
