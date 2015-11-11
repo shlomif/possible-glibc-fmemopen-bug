@@ -2,13 +2,18 @@
 
 =head1 Reproduce a bug with glibc's fmemopen on Mageia Linux x86-64 Cauldron
 
+This is some C code to reproduce a bug with fmemopen(), and possibly some
+other functions, on glibc-2.22. I does not seem to happen in Linux distributions
+that use glibc-2.21.
+
 To reproduce type:
 
    make test
 
-You'll need gcc and perl 5.
+You'll need GNU make, gcc, and perl 5.
 
 Tested with glibc-2.22-9.mga6, gcc-5.2.1-0.20151103.1.mga6 on Mageia Linux
-x86-64 v6 (Cauldron).
+x86-64 v6 (Cauldron). Also tested with the vanilla glibc. This seems to
+work fine on Debian x86-64 Testing and on Fedora x86-64 22.
 
 =cut
