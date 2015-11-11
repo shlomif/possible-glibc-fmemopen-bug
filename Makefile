@@ -1,7 +1,7 @@
 all: a.out
 
 a.out: test-w-calls.c calls.c
-	gcc -o $@ -g $<
+	gcc -D_POSIX_C_SOURCE=200809 -Wall -o $@ -g $<
 
 test: a.out
 	prove t/*.t
